@@ -1,0 +1,32 @@
+.workCard {
+  width: 100%;
+  border-radius: 25px;
+  transition: transform .3s; /* Animation */
+  overflow: hidden;
+  /*background-color: RGB(255, 180, 0, 0.7);*/
+}
+
+.creatingWorkCard {
+  width: 340px;
+  border-radius: 25px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.cardFooter {
+  border: none;
+  padding-bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.expired {
+  font-size: 2.7em;
+  color: red;
+  text-align: center;
+}
+
+.workCard:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

@@ -1,0 +1,19 @@
+.auth-option {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.auth-option:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.form-container {
+  width: 600px;
+  margin: auto;
+  margin-top: 170px;
+  border: solid 1px;
+  border-radius: 25px;
+  padding: 40px;
+}

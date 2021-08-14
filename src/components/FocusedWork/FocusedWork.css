@@ -1,0 +1,10 @@
+.options-header {
+  border: solid grey 1px;
+  border-radius: 25px 25px 0 0;
+  height: 30px;
+}
+
+.options-group {
+  float: right;
+  margin-right: 10px;
+}
