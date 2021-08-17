@@ -24,6 +24,9 @@ function WorkCard(props) {
 
   const [timeLeft, setTimeLeft] = useState();
 
+  const completedColor = props.work.completed ?
+    {opacity: 0.5} : getUrgencyColor(timeLeft);
+
   function count () {
     const now = new Date().getTime();
     const t = deadline.getTime() - now;
@@ -54,7 +57,7 @@ function WorkCard(props) {
     <Card
       className={styleClass}
       onClick={handleClick}
-      style={{...getUrgencyColor(timeLeft), ...props.style}}
+      style={{...completedColor, ...props.style}}
       >
       <Card.Body>
         <Card.Title as="h2" style={{fontSize: '2.3em'}}>
@@ -75,29 +78,33 @@ function WorkCard(props) {
         </Card.Body>
         <Card.Footer className="cardFooter">
         {
+          props.work.completed ?
+            <Card.Text className="completed mb-3">
+              Complete<Icon name="exclamation"/>
+            </Card.Text>
+            :
           expired ?
-          <Card.Text className="expired mb-3">
-            LATE<Icon name="exclamation"/>
-          </Card.Text>
-          :
-          <Statistic.Group size="small" style={{margin: 0}}>
-
-            <Statistic>
-              <Statistic.Value>{day}</Statistic.Value>
-              <Statistic.Label>Days</Statistic.Label>
-            </Statistic>
-            <Statistic>
-              <Statistic.Value>{hour}</Statistic.Value>
-              <Statistic.Label>Hours</Statistic.Label>
-            </Statistic>
-            <Statistic>
-              <Statistic.Value>{minute}</Statistic.Value>
-              <Statistic.Label>Minutes</Statistic.Label>
-            </Statistic>
-            <Statistic>
-              <Statistic.Value>{second}</Statistic.Value>
-              <Statistic.Label>Seconds</Statistic.Label>
-          </Statistic></Statistic.Group>
+            <Card.Text className="expired mb-3">
+              LATE<Icon name="exclamation"/>
+            </Card.Text>
+            :
+            <Statistic.Group size="small" style={{margin: 0}}>
+              <Statistic>
+                <Statistic.Value>{day}</Statistic.Value>
+                <Statistic.Label>Days</Statistic.Label>
+              </Statistic>
+              <Statistic>
+                <Statistic.Value>{hour}</Statistic.Value>
+                <Statistic.Label>Hours</Statistic.Label>
+              </Statistic>
+              <Statistic>
+                <Statistic.Value>{minute}</Statistic.Value>
+                <Statistic.Label>Minutes</Statistic.Label>
+              </Statistic>
+              <Statistic>
+                <Statistic.Value>{second}</Statistic.Value>
+                <Statistic.Label>Seconds</Statistic.Label>
+            </Statistic></Statistic.Group>
         }
         </Card.Footer>
     </Card>

@@ -15,6 +15,7 @@ import EditWork from '../CreateWork/EditWork';
       <Switch>
         <Route exact path='/' component={WorkCardsGrid}/>
         <Route path='/create-work' component={CreateWork}/>
+        <Route path='/completed-works' component={WorkCardsGrid}/>
         <Route path='/edit-work/:id' component={EditWork}/>
         <Route path='/work/:id' component={FocusedWork}/>
         <Route path='/settings' component={Settings}/>

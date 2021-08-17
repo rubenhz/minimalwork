@@ -39,6 +39,15 @@ function FocusedWork() {
     history.push(`/edit-work/${work.workCardId}`)
   }
 
+  const completeWork = () => {
+    work.completed = !work.completed;
+    database.ref(`users/${currentUser.uid}/works/${work.workCardId}`).
+    update(work);
+    history.push('/');
+  }
+
+  console.log(work)
+
   return (
     <div className="mt-5">
     {
@@ -47,6 +56,13 @@ function FocusedWork() {
         <div>
         <div className='options-header'>
         <div className='options-group'>
+        <Icon
+          link
+          name='check'
+          size='large'
+          color='grey'
+          onClick={completeWork}
+        />
         <Icon
           link
           name="edit"

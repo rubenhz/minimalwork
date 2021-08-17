@@ -10,10 +10,23 @@ function WorkCardsGrid(props) {
   const { currentUser } = useAuth();
   const [works, updateWorks] = useState([]);
 
-  const active = work => !work.completed;
-  const completed = work => work.completed;
-  const all = work => work;
-  const late = work => work.late;
+  const activeWorks = work => !work.completed;
+  const completedWorks = work => work.completed;
+  const allWorks = work => work;
+  const lateWorks = work => work.late;
+
+  let workFilter;
+  switch(true) {
+    case props.location.pathname == '/':
+      workFilter = activeWorks;
+      break;
+    case props.location.pathname == '/completed-works':
+      workFilter = completedWorks;
+      break;
+    default:
+      workFilter = allWorks;
+  }
+
 
   useEffect(() => {
     if (currentUser) {
@@ -36,7 +49,7 @@ function WorkCardsGrid(props) {
       currentUser ?
         <Grid doubling stretched columns={3} >
            {
-             works.filter(all).map((work, index) => (
+             works.filter(workFilter).map((work, index) => (
                <Grid.Column>
                  <WorkCard short key={index} work={work}/>
                </Grid.Column>
