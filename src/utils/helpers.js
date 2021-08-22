@@ -27,21 +27,33 @@ export function shortenText(text, len) {
 }
 
 export function getUrgencyColor(timeLeft) {
-  const oneDay = 86400000;
-
-  const opacity = 1 - (timeLeft / (oneDay / 0.8));
-  const opacityExponential = 1 - ((5**(timeLeft/oneDay)) - 1);
-
-  const colors = {
-    late: {backgroundColor: 'rgb()'},
-    dueInLessThan12Hours: {backgroundColor: `rgb(255, 180, 0, ${opacityExponential})`},
-    dueInLessThan24Hours: {backgroundColor: 'rgb(255, 180, 0, 0.3)'},
-    dueInLessThan3Days: {backgroundColor: 'rgb(98, 148, 51, 0.3)'},
-    default: {backgroundColor: 'rgb()'}
-  }
+  const oneHour = 3600000;
+  const oneDay = oneHour * 24;
 
   let urgencyColor;
+  if (timeLeft <= oneHour) {
+    urgencyColor = 'red';
+  } else if (timeLeft <= oneHour * 5) {
+    urgencyColor = 'orange';
+  } else if (timeLeft <= oneDay / 2) {
+    urgencyColor = 'yellow';
+  } else if (timeLeft <= oneDay) {
+    urgencyColor = 'blue'
+  } else {
+    urgencyColor = 'black';
+  }
 
-  return colors.dueInLessThan12Hours;
+
+  return urgencyColor;
 
 }
+
+// if (timeLeft <= oneDay) {
+//   urgencyColor = {background: 'blue'};
+// } else if (timeLeft <= oneDay / 2) {
+//   urgencyColor = {background: 'yellow'};
+// } else if (timeLeft <= oneHour * 5) {
+//   urgencyColor = {background: 'orange'};
+// } else {
+//   urgencyColor = {background: 'black'};
+// }
