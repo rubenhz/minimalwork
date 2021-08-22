@@ -47,6 +47,7 @@ function WorkCardsGrid(props) {
     <div className="workCardsGrid" >
     {
       currentUser ?
+        works.length > 0 ?
         <Grid doubling stretched columns={3} >
            {
              works.filter(workFilter).map((work, index) => (
@@ -56,6 +57,12 @@ function WorkCardsGrid(props) {
              ))
            }
          </Grid>
+         :
+         <SemanticHeader
+          content='Nothing Here'
+          textAlign='center'
+          style={{marginTop: 350, fontSize: '4em', color: 'grey'}}
+         />
          :
          <SemanticHeader
           content='Sign In or Create an Account to Use MinimalWork'

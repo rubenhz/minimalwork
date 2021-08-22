@@ -17,15 +17,14 @@ function WorkCard(props) {
 
   const deadline = new Date(props.work.datetime);
   const [expired, setExpired] = useState(false);
-  const [day, setDay] = useState('00');
-  const [hour, setHour] = useState('00');
-  const [minute, setMinute] = useState('00');
-  const [second, setSecond] = useState('00');
+  const [day, setDay] = useState(false);
+  const [hour, setHour] = useState(false);
+  const [minute, setMinute] = useState(false);
+  const [second, setSecond] = useState(false);
 
   const [timeLeft, setTimeLeft] = useState();
 
-  const completedColor = props.work.completed ?
-    {opacity: 0.5} : getUrgencyColor(timeLeft);
+  const opacity = props.work.completed ? 0.5 : 1;
 
   function count () {
     const now = new Date().getTime();
@@ -57,7 +56,7 @@ function WorkCard(props) {
     <Card
       className={styleClass}
       onClick={handleClick}
-      style={{...completedColor, ...props.style}}
+      style={{opacity: opacity, ...props.style}}
       >
       <Card.Body>
         <Card.Title as="h2" style={{fontSize: '2.3em'}}>
@@ -88,23 +87,42 @@ function WorkCard(props) {
               LATE<Icon name="exclamation"/>
             </Card.Text>
             :
-            <Statistic.Group size="small" style={{margin: 0}}>
-              <Statistic>
-                <Statistic.Value>{day}</Statistic.Value>
-                <Statistic.Label>Days</Statistic.Label>
-              </Statistic>
-              <Statistic>
-                <Statistic.Value>{hour}</Statistic.Value>
-                <Statistic.Label>Hours</Statistic.Label>
-              </Statistic>
-              <Statistic>
-                <Statistic.Value>{minute}</Statistic.Value>
-                <Statistic.Label>Minutes</Statistic.Label>
-              </Statistic>
-              <Statistic>
-                <Statistic.Value>{second}</Statistic.Value>
-                <Statistic.Label>Seconds</Statistic.Label>
-            </Statistic></Statistic.Group>
+            day + hour + minute + second ?
+              <Statistic.Group size="small" style={{margin: 0}} color={getUrgencyColor(timeLeft)}>
+                <Statistic>
+                  <Statistic.Value>
+                    {day}
+                  </Statistic.Value>
+                  <Statistic.Label>Days</Statistic.Label>
+                </Statistic>
+                <Statistic>
+                  <Statistic.Value>
+                    {hour}
+                  </Statistic.Value>
+                  <Statistic.Label>Hours</Statistic.Label>
+                </Statistic>
+                <Statistic>
+                  <Statistic.Value>
+                    {minute}
+                  </Statistic.Value>
+                  <Statistic.Label>Minutes</Statistic.Label>
+                </Statistic>
+                <Statistic>
+                  <Statistic.Value>
+                    {second}
+                  </Statistic.Value>
+                  <Statistic.Label>Seconds</Statistic.Label>
+                </Statistic>
+              </Statistic.Group>
+            :
+            <Statistic style={{marginLeft: '38%'}}>
+              <Statistic.Value>
+                <Loader active inline='centered'/>
+              </Statistic.Value>
+              <Statistic.Label>
+                Loading
+              </Statistic.Label>
+            </Statistic>
         }
         </Card.Footer>
     </Card>
