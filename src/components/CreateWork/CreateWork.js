@@ -57,6 +57,7 @@ function CreateWork(props) {
     setDescription('');
     setDueDatetime(new Date());
     setCompleted(false);
+    setWorkCardId(guid());
   }
 
   const handleUpdate = () => {
